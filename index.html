@@ -17,7 +17,7 @@ body {
   margin: auto;
 }
 
-/* Card styling */
+/* SLIDER CARD */
 .card {
   border: 1px solid #e0e0e0;
   border-radius: 16px;
@@ -25,7 +25,6 @@ body {
   background: white;
   box-shadow: 0 1px 3px rgba(0,0,0,0.08);
   display: none;
-  transition: opacity 0.4s ease;
 }
 
 .card.active {
@@ -50,14 +49,41 @@ body {
   color: #3c4043;
 }
 
-/* optional subtle fade */
-.fade {
-  animation: fadein 0.4s ease;
+/* CTA BUTTON */
+.cta {
+  margin-top: 18px;
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #dadce0;
+  font-size: 14px;
+  text-decoration: none;
+  color: #1a73e8;
+  background: #f8f9fa;
 }
 
-@keyframes fadein {
-  from { opacity: 0.6; }
-  to { opacity: 1; }
+.cta:hover {
+  background: #eef3fd;
+}
+
+/* VIEW ALL BUTTON */
+.view-all {
+  margin-top: 18px;
+  text-align: center;
+}
+
+.view-all a {
+  display: inline-block;
+  padding: 12px 18px;
+  background: #1a73e8;
+  color: white;
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.view-all a:hover {
+  background: #1558b0;
 }
 </style>
 </head>
@@ -67,74 +93,77 @@ body {
 <div class="container">
 
   <!-- SLIDE 1 -->
-  <a href="https://www.google.com/search?sca_esv=59e8ea9c916b862d&rlz=1C1ONGR_enNZ1015NZ1015&sxsrf=ANbL-n4BIXoBsDEorV_SViJgZus_Pu9chQ:1779915476186&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOdrtChM_U_9eiWHoQPaIas9-3hVQxSimWCPAVWAb89Tb6walIxtjOsz0iujGOv1L7t0EQYcwVMn4TST_4DFc-_0TxPLSZWwb9ekg3ekFomiAw3770w%3D%3D&q=Science+in+a+Van+Reviews"
-     target="_blank"
-     style="text-decoration:none;color:inherit;">
-
-    <div class="card active fade">
-      <div class="name">Tim Christie</div>
-      <div class="stars">★★★★★</div>
-      <div class="text">
-        A great show. Hit the mark on filling in the scientific gaps of our classroom unit. Entertaining and lively. Thanks team!
-      </div>
+  <div class="card active">
+    <div class="name">Tim Christie</div>
+    <div class="stars">★★★★★</div>
+    <div class="text">
+      A great show. Hit the mark on filling in the scientific gaps of our classroom unit. Entertaining and lively. Thanks team!
     </div>
-  </a>
+
+    <a class="cta" href="https://www.google.com/search?q=Science+in+a+Van+Reviews" target="_blank">
+      View on Google Reviews
+    </a>
+  </div>
 
   <!-- SLIDE 2 -->
-  <a href="https://www.google.com/search?sca_esv=59e8ea9c916b862d&rlz=1C1ONGR_enNZ1015NZ1015&sxsrf=ANbL-n4BIXoBsDEorV_SViJgZus_Pu9chQ:1779915476186&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOdrtChM_U_9eiWHoQPaIas9-3hVQxSimWCPAVWAb89Tb6walIxtjOsz0iujGOv1L7t0EQYcwVMn4TST_4DFc-_0TxPLSZWwb9ekg3ekFomiAw3770w%3D%3D&q=Science+in+a+Van+Reviews"
-     target="_blank"
-     style="text-decoration:none;color:inherit;">
-
-    <div class="card">
-      <div class="name">Deputy Principal</div>
-      <div class="stars">★★★★★</div>
-      <div class="text">
-        Thank you Science in a Van for the amazing science show. Our tamariki had an engaging and exciting learning experience with you both.
-      </div>
+  <div class="card">
+    <div class="name">Deputy Principal</div>
+    <div class="stars">★★★★★</div>
+    <div class="text">
+      Thank you Science in a Van for the amazing science show. Our tamariki had an engaging and exciting learning experience.
     </div>
-  </a>
+
+    <a class="cta" href="https://www.google.com/search?q=Science+in+a+Van+Reviews" target="_blank">
+      View photos & review
+    </a>
+  </div>
 
   <!-- SLIDE 3 -->
-  <a href="https://www.google.com/search?sca_esv=59e8ea9c916b862d&rlz=1C1ONGR_enNZ1015NZ1015&sxsrf=ANbL-n4BIXoBsDEorV_SViJgZus_Pu9chQ:1779915476186&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOdrtChM_U_9eiWHoQPaIas9-3hVQxSimWCPAVWAb89Tb6walIxtjOsz0iujGOv1L7t0EQYcwVMn4TST_4DFc-_0TxPLSZWwb9ekg3ekFomiAw3770w%3D%3D&q=Science+in+a+Van+Reviews"
-     target="_blank"
-     style="text-decoration:none;color:inherit;">
-
-    <div class="card">
-      <div class="name">Sarah Akroyd</div>
-      <div class="stars">★★★★★</div>
-      <div class="text">
-        Such a fun and engaging show — a great way to get students and teachers buzzing about science!
-      </div>
+  <div class="card">
+    <div class="name">Sarah Akroyd</div>
+    <div class="stars">★★★★★</div>
+    <div class="text">
+      Such a fun and engaging show — a great way to get students and teachers buzzing about science!
     </div>
-  </a>
+
+    <a class="cta" href="https://www.google.com/search?q=Science+in+a+Van+Reviews" target="_blank">
+      Read full review thread
+    </a>
+  </div>
 
   <!-- SLIDE 4 -->
-  <a href="https://www.google.com/search?sca_esv=59e8ea9c916b862d&rlz=1C1ONGR_enNZ1015NZ1015&sxsrf=ANbL-n4BIXoBsDEorV_SViJgZus_Pu9chQ:1779915476186&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOdrtChM_U_9eiWHoQPaIas9-3hVQxSimWCPAVWAb89Tb6walIxtjOsz0iujGOv1L7t0EQYcwVMn4TST_4DFc-_0TxPLSZWwb9ekg3ekFomiAw3770w%3D%3D&q=Science+in+a+Van+Reviews"
-     target="_blank"
-     style="text-decoration:none;color:inherit;">
-
-    <div class="card">
-      <div class="name">Gumboots Teachers</div>
-      <div class="stars">★★★★★</div>
-      <div class="text">
-        What a fantastic show! Very entertaining and so much science learning while having fun.
-      </div>
+  <div class="card">
+    <div class="name">Gumboots Teachers</div>
+    <div class="stars">★★★★★</div>
+    <div class="text">
+      What a fantastic show! Very entertaining and so much science learning while having fun.
     </div>
-  </a>
+
+    <a class="cta" href="https://www.google.com/search?q=Science+in+a+Van+Reviews" target="_blank">
+      See more feedback
+    </a>
+  </div>
 
   <!-- SLIDE 5 -->
-  <a href="https://www.google.com/search?sca_esv=59e8ea9c916b862d&rlz=1C1ONGR_enNZ1015NZ1015&sxsrf=ANbL-n4BIXoBsDEorV_SViJgZus_Pu9chQ:1779915476186&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOdrtChM_U_9eiWHoQPaIas9-3hVQxSimWCPAVWAb89Tb6walIxtjOsz0iujGOv1L7t0EQYcwVMn4TST_4DFc-_0TxPLSZWwb9ekg3ekFomiAw3770w%3D%3D&q=Science+in+a+Van+Reviews"
-     target="_blank"
-     style="text-decoration:none;color:inherit;">
-
-    <div class="card">
-      <div class="name">Jasmine Plant</div>
-      <div class="stars">★★★★★</div>
-      <div class="text">
-        We attended Science in a Van with our homeschool community in Hawke’s Bay. We thoroughly enjoyed it.
-      </div>
+  <div class="card">
+    <div class="name">Jasmine Plant</div>
+    <div class="stars">★★★★★</div>
+    <div class="text">
+      We attended Science in a Van with our homeschool community in Hawke’s Bay. We thoroughly enjoyed it.
     </div>
-  </a>
+
+    <a class="cta" href="https://www.google.com/search?q=Science+in+a+Van+Reviews" target="_blank">
+      Open Google reviews
+    </a>
+  </div>
+
+  <!-- VIEW ALL BUTTON -->
+  <div class="view-all">
+    <a href="https://www.google.com/search?sca_esv=59e8ea9c916b862d&rlz=1C1ONGR_enNZ1015NZ1015&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOdrtChM_U_9eiWHoQPaIas9-3hVQxSimWCPAVWAb89Tb6walIxtjOsz0iujGOv1L7t0EQYcwVMn4TST_4DFc-_0TxPLSZWwb9ekg3ekFomiAw3770w%3D%3D&q=Science+in+a+Van+Reviews"
+       target="_blank">
+      View All Google Reviews →
+    </a>
+  </div>
 
 </div>
 
@@ -145,16 +174,9 @@ document.addEventListener("DOMContentLoaded", function () {
   let current = 0;
 
   function showCard(index) {
-    cards.forEach(c => {
-      c.classList.remove('active');
-      c.classList.remove('fade');
-    });
-
+    cards.forEach(c => c.classList.remove('active'));
     cards[index].classList.add('active');
-    cards[index].classList.add('fade');
   }
-
-  showCard(0);
 
   setInterval(() => {
     current = (current + 1) % cards.length;
