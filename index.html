@@ -53,6 +53,27 @@ body {
   margin: 6px 0;
 }
 
+  .dots {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.dot {
+  height: 8px;
+  width: 8px;
+  margin: 0 4px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #cfd8dc;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dot.active {
+  background: #1a73e8;
+  transform: scale(1.2);
+}
+  
 .text {
   font-size: 16px;
   line-height: 1.6;
@@ -141,6 +162,7 @@ body {
     <button class="arrow right" onclick="nextReview()">›</button>
 
     <div id="reviews"></div>
+    <div id="dots" class="dots"></div>
 
   </div>
 
@@ -357,6 +379,19 @@ const reviews = [
 let index = 0;
 const container = document.getElementById("reviews");
 
+const dotsContainer = document.getElementById("dots");
+
+function renderDots() {
+  dotsContainer.innerHTML = reviews.map((_, i) => `
+    <span class="dot ${i === index ? "active" : ""}" onclick="goToReview(${i})"></span>
+  `).join("");
+}
+
+function goToReview(i) {
+  index = i;
+  render();
+}
+  
 function render() {
   const r = reviews[index];
 
@@ -381,7 +416,7 @@ function render() {
   `;
 
   // 🔥 NEW: adjust container height smoothly
-  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
     const box = document.querySelector(".review-box");
     const active = document.querySelector(".review-slide.active");
 
@@ -389,7 +424,10 @@ function render() {
       box.style.height = active.offsetHeight + 48 + "px";
     }
   });
+
+  renderDots(); // 👈 add it here (ONLY once)
 }
+  
   setTimeout(() => {
   const box = document.querySelector(".review-box");
   const active = document.querySelector(".review-slide.active");
