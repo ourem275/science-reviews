@@ -9,19 +9,19 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 20px;
-  background: transparent;
 }
 
 .container {
-  max-width: 700px;
+  max-width: 760px;
   margin: auto;
+  position: relative;
 }
 
-/* SLIDER CARD */
+/* CARD */
 .card {
   border: 1px solid #e0e0e0;
   border-radius: 16px;
-  padding: 24px;
+  padding: 22px;
   background: white;
   box-shadow: 0 1px 3px rgba(0,0,0,0.08);
   display: none;
@@ -31,6 +31,7 @@ body {
   display: block;
 }
 
+/* TEXT */
 .name {
   font-size: 18px;
   font-weight: 600;
@@ -47,29 +48,87 @@ body {
   font-size: 16px;
   line-height: 1.6;
   color: #3c4043;
+  white-space: pre-wrap; /* CRITICAL: prevents text truncation */
 }
 
-/* CTA BUTTON */
-.cta {
-  margin-top: 18px;
-  display: inline-block;
-  padding: 10px 14px;
+/* PHOTO */
+.photo-wrap {
+  margin-top: 12px;
+  position: relative;
+}
+
+.photo {
+  max-width: 100%;
   border-radius: 10px;
+  max-height: 300px;
+  object-fit: cover;
+  display: block;
+
+  opacity: 0;
+  transform: scale(0.98);
+  animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; transform: scale(1); }
+}
+
+.photo-badge {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.75);
+  color: white;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 999px;
+}
+
+/* ARROWS */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
   border: 1px solid #dadce0;
-  font-size: 14px;
-  text-decoration: none;
-  color: #1a73e8;
-  background: #f8f9fa;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  user-select: none;
 }
 
-.cta:hover {
-  background: #eef3fd;
-}
+.arrow.left { left: -18px; }
+.arrow.right { right: -18px; }
 
-/* VIEW ALL BUTTON */
-.view-all {
-  margin-top: 18px;
+/* DOTS */
+.dots {
   text-align: center;
+  margin-top: 12px;
+}
+
+.dot {
+  height: 8px;
+  width: 8px;
+  margin: 0 3px;
+  background: #ccc;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot.active {
+  background: #1a73e8;
+}
+
+/* BUTTON */
+.view-all {
+  text-align: center;
+  margin-top: 18px;
 }
 
 .view-all a {
@@ -81,10 +140,6 @@ body {
   border-radius: 12px;
   font-weight: 600;
 }
-
-.view-all a:hover {
-  background: #1558b0;
-}
 </style>
 </head>
 
@@ -92,98 +147,157 @@ body {
 
 <div class="container">
 
-  <!-- SLIDE 1 -->
-  <div class="card active">
-    <div class="name">Tim Christie</div>
-    <div class="stars">★★★★★</div>
-    <div class="text">
-      A great show. Hit the mark on filling in the scientific gaps of our classroom unit. Entertaining and lively. Thanks team!
-    </div>
+<div class="arrow left" onclick="prevSlide()">‹</div>
+<div class="arrow right" onclick="nextSlide()">›</div>
 
-    <a class="cta" href="https://www.google.com/search?q=Science+in+a+Van+Reviews" target="_blank">
-      View on Google Reviews
-    </a>
-  </div>
+<!-- 1 -->
+<div class="card active">
+  <div class="name">Gumboots Teachers</div>
+  <div class="stars">★★★★★</div>
+  <div class="text">What a fantastic show! Emily was great, very entertaining and so much science learning while having fun with bubbles. Well worth the price. Gumboots - Maraekakaho Early Childhood Centre and Tots n Dots from Kereru really enjoyed your fun show. Thank you Science in a Van :-)</div>
+</div>
 
-  <!-- SLIDE 2 -->
-  <div class="card">
-    <div class="name">Deputy Principal</div>
-    <div class="stars">★★★★★</div>
-    <div class="text">
-      Thank you Science in a Van for the amazing science show. Our tamariki had an engaging and exciting learning experience.
-    </div>
+<!-- 2 -->
+<div class="card">
+  <div class="name">Stacey Kale</div>
+  <div class="stars">★★★★★</div>
+  <div class="text">Pitched perfectly for our group of learners in our homeschool community. My kids loved the humour sprinkled amongst learning about physics and forces. Great crowd interaction, great energy - the kids are very keen to come along to your next show in Hawkes Bay.</div>
+</div>
 
-    <a class="cta" href="https://www.google.com/search?q=Science+in+a+Van+Reviews" target="_blank">
-      View photos & review
-    </a>
-  </div>
+<!-- 3 KAREN + PHOTO -->
+<div class="card">
+  <div class="name">Karen Kanon</div>
+  <div class="stars">★★★★★</div>
 
-  <!-- SLIDE 3 -->
-  <div class="card">
-    <div class="name">Sarah Akroyd</div>
-    <div class="stars">★★★★★</div>
-    <div class="text">
-      Such a fun and engaging show — a great way to get students and teachers buzzing about science!
-    </div>
+  <div class="text">What a wonderful experience for Whare Tiaki at Tuakau Primary today. We learnt heaps about science in a fun way. We learnt about forces- pushing, pulling and friction, with Emily while getting the troll (Alan) to move. Then we got to see giant bubbles in action. Years 1-4 all enjoyed and wanted more.
+Thanks for a well organised and professional set up and a humorous and very educational scientific day.</div>
 
-    <a class="cta" href="https://www.google.com/search?q=Science+in+a+Van+Reviews" target="_blank">
-      Read full review thread
-    </a>
-  </div>
-
-  <!-- SLIDE 4 -->
-  <div class="card">
-    <div class="name">Gumboots Teachers</div>
-    <div class="stars">★★★★★</div>
-    <div class="text">
-      What a fantastic show! Very entertaining and so much science learning while having fun.
-    </div>
-
-    <a class="cta" href="https://www.google.com/search?q=Science+in+a+Van+Reviews" target="_blank">
-      See more feedback
-    </a>
-  </div>
-
-  <!-- SLIDE 5 -->
-  <div class="card">
-    <div class="name">Jasmine Plant</div>
-    <div class="stars">★★★★★</div>
-    <div class="text">
-      We attended Science in a Van with our homeschool community in Hawke’s Bay. We thoroughly enjoyed it.
-    </div>
-
-    <a class="cta" href="https://www.google.com/search?q=Science+in+a+Van+Reviews" target="_blank">
-      Open Google reviews
-    </a>
-  </div>
-
-  <!-- VIEW ALL BUTTON -->
-  <div class="view-all">
-    <a href="https://www.google.com/search?sca_esv=59e8ea9c916b862d&rlz=1C1ONGR_enNZ1015NZ1015&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOdrtChM_U_9eiWHoQPaIas9-3hVQxSimWCPAVWAb89Tb6walIxtjOsz0iujGOv1L7t0EQYcwVMn4TST_4DFc-_0TxPLSZWwb9ekg3ekFomiAw3770w%3D%3D&q=Science+in+a+Van+Reviews"
+  <div class="photo-wrap">
+    <a href="https://lh3.googleusercontent.com/grass-cs/ANxoTn1IPCbpTh5sWauRO_fVskvmzsxNQd-EMf_ZbNl8oUCdOBBqo8kZZZwjdHolfBzOcq45bWCaEN6vMDnjrzUKyVCPmnBEE04B2PiIcJHsIVlL36GB-nbDAb3XrMhUzfS6Df6DAc0=s3072-w3072-h1484-rw"
        target="_blank">
-      View All Google Reviews →
+      <img class="photo"
+           src="https://lh3.googleusercontent.com/grass-cs/ANxoTn1IPCbpTh5sWauRO_fVskvmzsxNQd-EMf_ZbNl8oUCdOBBqo8kZZZwjdHolfBzOcq45bWCaEN6vMDnjrzUKyVCPmnBEE04B2PiIcJHsIVlL36GB-nbDAb3XrMhUzfS6Df6DAc0=s3072-w3072-h1484-rw">
     </a>
+    <div class="photo-badge">📷 1 photo</div>
   </div>
+</div>
+
+<!-- 4 -->
+<div class="card">
+  <div class="name">Ravisha Dutt</div>
+  <div class="stars">★★★★★</div>
+  <div class="text">I was very impressed about the Science in the Van show because although the children had so much fun laughing and interacting back and forth, they never lost the science learning intentions and these were delivered throughout the show.</div>
+</div>
+
+<!-- 5 -->
+<div class="card">
+  <div class="name">Claire Cheeseman</div>
+  <div class="stars">★★★★★</div>
+  <div class="text">The best experience a group or class can have! So much fun and learning - we adore having Science in a Van EVERY YEAR!</div>
+</div>
+
+<!-- 6 -->
+<div class="card">
+  <div class="name">Lisa Marwick</div>
+  <div class="stars">★★★★★</div>
+  <div class="text">This duo were amazing! The students loved the informative and interactive show. It made science relatable to the real world. Will definitely book again next year.</div>
+</div>
+
+<!-- 7 -->
+<div class="card">
+  <div class="name">Komal Singh</div>
+  <div class="stars">★★★★★</div>
+  <div class="text">Science in the Van The Billy Goat Gruff Show was a fantastic experience for our tamariki. It was highly engaging and held the children’s attention throughout, with plenty of laughter and excitement.</div>
+</div>
+
+<!-- 8 -->
+<div class="card">
+  <div class="name">Fiona Francois</div>
+  <div class="stars">★★★★★</div>
+  <div class="text">Thank you Emily for bringing your wonderful show to our Kindergarten sharing your energy, passion, knowledge and enthusiasm. The children had a fabulous time learning about mixtures, bubbles and science.</div>
+</div>
+
+<!-- 9 -->
+<div class="card">
+  <div class="name">Rebecca Hedges</div>
+  <div class="stars">★★★★★</div>
+  <div class="text">Theatre AND science in one? Priceless. Emily and Alan were hilarious, informative and interactive and kept our 75 5yr olds completely enthralled.</div>
+</div>
+
+<!-- 10 -->
+<div class="card">
+  <div class="name">Tamie Fiveash</div>
+  <div class="stars">★★★★★</div>
+  <div class="text">I enjoyed the show. It was great that you involved both teachers and students. The quick pace ensured engagement and discussion around scientific terms.</div>
+</div>
+
+<!-- 11 -->
+<div class="card">
+  <div class="name">Arima Rhodes</div>
+  <div class="stars">★★★★★</div>
+  <div class="text">Had Science in a Van in our school today for the wonderful world of bubbles show, and it was awesome! The kids were engaged and learnt heaps.</div>
+</div>
+
+<!-- 12 -->
+<div class="card">
+  <div class="name">Candy Wang</div>
+  <div class="stars">★★★★★</div>
+  <div class="text">We had so much fun learning about science with Emily. She has a great sense of humour and a lovely presence with the children.</div>
+</div>
+
+<!-- DOTS -->
+<div class="dots" id="dots"></div>
+
+<!-- BUTTON -->
+<div class="view-all">
+  <a href="https://www.google.com/search?q=Science+in+a+Van+Reviews" target="_blank">
+    Read All Google Reviews →
+  </a>
+</div>
 
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+let current = 0;
+const cards = document.querySelectorAll('.card');
+const dotsContainer = document.getElementById('dots');
+let dots = [];
 
-  const cards = document.querySelectorAll('.card');
-  let current = 0;
+function showSlide(i) {
+  cards.forEach(c => c.classList.remove('active'));
+  dots.forEach(d => d.classList.remove('active'));
 
-  function showCard(index) {
-    cards.forEach(c => c.classList.remove('active'));
-    cards[index].classList.add('active');
-  }
+  cards[i].classList.add('active');
+  dots[i].classList.add('active');
+}
 
-  setInterval(() => {
-    current = (current + 1) % cards.length;
-    showCard(current);
-  }, 5000);
+function nextSlide() {
+  current = (current + 1) % cards.length;
+  showSlide(current);
+}
 
+function prevSlide() {
+  current = (current - 1 + cards.length) % cards.length;
+  showSlide(current);
+}
+
+/* dots */
+cards.forEach((_, i) => {
+  const dot = document.createElement('span');
+  dot.classList.add('dot');
+  if (i === 0) dot.classList.add('active');
+
+  dot.onclick = () => {
+    current = i;
+    showSlide(i);
+  };
+
+  dotsContainer.appendChild(dot);
+  dots.push(dot);
 });
+
+/* autoplay */
+setInterval(nextSlide, 5000);
 </script>
 
 </body>
