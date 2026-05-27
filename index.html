@@ -23,6 +23,8 @@ body {
   box-shadow: 0 1px 3px rgba(0,0,0,0.08);
   min-height: 260px;
   overflow: hidden;
+    transition: height 0.35s ease;
+
 }
 
 .review-slide {
@@ -359,28 +361,43 @@ function render() {
   const r = reviews[index];
 
   container.innerHTML = `
-  <div class="review-slide active">
+    <div class="review-slide active">
+      <div class="review-flex">
 
-    <div class="review-flex">
-
-      <div class="review-text">
-        <div class="name">${r.name}</div>
-        <div class="stars">${r.stars}</div>
-        <div class="text">${r.text}</div>
-      </div>
-
-      ${r.img ? `
-        <div class="review-image">
-          <img src="${r.img}" />
+        <div class="review-text">
+          <div class="name">${r.name}</div>
+          <div class="stars">${r.stars}</div>
+          <div class="text">${r.text}</div>
         </div>
-      ` : ``}
 
+        ${r.img ? `
+          <div class="review-image">
+            <img src="${r.img}" />
+          </div>
+        ` : ``}
+
+      </div>
     </div>
+  `;
 
-  </div>
-`;
+  // 🔥 NEW: adjust container height smoothly
+  requestAnimationFrame(() => {
+    const box = document.querySelector(".review-box");
+    const active = document.querySelector(".review-slide.active");
+
+    if (box && active) {
+      box.style.height = active.offsetHeight + 48 + "px";
+    }
+  });
 }
+  setTimeout(() => {
+  const box = document.querySelector(".review-box");
+  const active = document.querySelector(".review-slide.active");
 
+  if (box && active) {
+    box.style.height = active.offsetHeight + 48 + "px";
+  }
+}, 50);
 function nextReview() {
   index = (index + 1) % reviews.length;
   render();
