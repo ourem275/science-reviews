@@ -1,37 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Science in a Van Reviews</title>
 
 <style>
 body {
   font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 20px;
+  background: transparent;
 }
 
-.container {
+.wrapper {
   max-width: 760px;
   margin: auto;
-  position: relative;
 }
 
-/* CARD */
-.card {
+.carousel {
+  position: relative;
   border: 1px solid #e0e0e0;
   border-radius: 16px;
-  padding: 22px;
+  padding: 24px;
   background: white;
   box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-  display: none;
+  min-height: 280px;
+  overflow: hidden;
 }
 
-.card.active {
+/* slides */
+.slide {
+  display: none;
+  animation: fade 0.4s ease-in-out;
+}
+
+.slide.active {
   display: block;
 }
 
-/* TEXT */
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 .name {
   font-size: 18px;
   font-weight: 600;
@@ -44,260 +54,297 @@ body {
   margin: 6px 0;
 }
 
+.meta {
+  font-size: 13px;
+  color: #5f6368;
+}
+
 .text {
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.6;
   color: #3c4043;
-  white-space: pre-wrap; /* CRITICAL: prevents text truncation */
+  margin-top: 10px;
+
+  /* IMPORTANT FIX: preserves ALL Google formatting */
+  white-space: pre-wrap;
 }
 
-/* PHOTO */
-.photo-wrap {
-  margin-top: 12px;
-  position: relative;
-}
-
+/* image */
 .photo {
-  max-width: 100%;
-  border-radius: 10px;
-  max-height: 300px;
+  margin-top: 12px;
+  width: 100%;
+  max-height: 260px;
   object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  display: none;
+}
+
+.photo.show {
   display: block;
-
-  opacity: 0;
-  transform: scale(0.98);
-  animation: fadeIn 0.4s ease forwards;
 }
 
-@keyframes fadeIn {
-  to { opacity: 1; transform: scale(1); }
-}
-
-.photo-badge {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background: rgba(0,0,0,0.75);
-  color: white;
-  font-size: 12px;
-  padding: 4px 8px;
-  border-radius: 999px;
-}
-
-/* ARROWS */
+/* arrows */
 .arrow {
   position: absolute;
-  top: 50%;
+  top: 45%;
   transform: translateY(-50%);
   background: white;
-  border: 1px solid #dadce0;
+  border: 1px solid #ddd;
   border-radius: 50%;
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  font-size: 22px;
+  line-height: 38px;
+  text-align: center;
   user-select: none;
+  z-index: 5;
 }
 
-.arrow.left { left: -18px; }
-.arrow.right { right: -18px; }
+.arrow:hover {
+  background: #f5f5f5;
+}
 
-/* DOTS */
-.dots {
+.left { left: -18px; }
+.right { right: -18px; }
+
+/* button */
+.button {
+  margin-top: 14px;
+  display: block;
   text-align: center;
-  margin-top: 12px;
-}
-
-.dot {
-  height: 8px;
-  width: 8px;
-  margin: 0 3px;
-  background: #ccc;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.dot.active {
-  background: #1a73e8;
-}
-
-/* BUTTON */
-.view-all {
-  text-align: center;
-  margin-top: 18px;
-}
-
-.view-all a {
-  display: inline-block;
-  padding: 12px 18px;
-  background: #1a73e8;
-  color: white;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
   text-decoration: none;
-  border-radius: 12px;
+  color: #202124;
   font-weight: 600;
+}
+
+.button:hover {
+  background: #f5f5f5;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="wrapper">
 
-<div class="arrow left" onclick="prevSlide()">‹</div>
-<div class="arrow right" onclick="nextSlide()">›</div>
+  <div class="carousel">
 
-<!-- 1 -->
-<div class="card active">
-  <div class="name">Gumboots Teachers</div>
-  <div class="stars">★★★★★</div>
-  <div class="text">What a fantastic show! Emily was great, very entertaining and so much science learning while having fun with bubbles. Well worth the price. Gumboots - Maraekakaho Early Childhood Centre and Tots n Dots from Kereru really enjoyed your fun show. Thank you Science in a Van :-)</div>
-</div>
+    <div class="arrow left" onclick="change(-1)">‹</div>
+    <div class="arrow right" onclick="change(1)">›</div>
 
-<!-- 2 -->
-<div class="card">
-  <div class="name">Stacey Kale</div>
-  <div class="stars">★★★★★</div>
-  <div class="text">Pitched perfectly for our group of learners in our homeschool community. My kids loved the humour sprinkled amongst learning about physics and forces. Great crowd interaction, great energy - the kids are very keen to come along to your next show in Hawkes Bay.</div>
-</div>
+    <!-- ================= SLIDES ================= -->
 
-<!-- 3 KAREN + PHOTO -->
-<div class="card">
-  <div class="name">Karen Kanon</div>
-  <div class="stars">★★★★★</div>
+    <div class="slide active">
+      <div class="name">Gumboots Teachers</div>
+      <div class="stars">★★★★★</div>
+      <div class="meta">2 months ago</div>
+      <div class="text">
+What a fantastic show! Emily was great, very entertaining and so much science learning while having fun with bubbles. Well worth the price. Gumboots - Maraekakaho Early Childhood Centre and Tots n Dots from Kereru really enjoyed your fun show. Thank you Science in a Van :-)
+      </div>
+      <img class="photo" src="" />
+    </div>
 
-  <div class="text">What a wonderful experience for Whare Tiaki at Tuakau Primary today. We learnt heaps about science in a fun way. We learnt about forces- pushing, pulling and friction, with Emily while getting the troll (Alan) to move. Then we got to see giant bubbles in action. Years 1-4 all enjoyed and wanted more.
-Thanks for a well organised and professional set up and a humorous and very educational scientific day.</div>
+    <div class="slide">
+      <div class="name">Stacey Kale</div>
+      <div class="stars">★★★★★</div>
+      <div class="meta">3 months ago</div>
+      <div class="text">
+Pitched perfectly for our group of learners in our homeschool community. My kids loved the humour sprinkled amongst learning about physics and forces. Great crowd interaction, great energy - the kids are very keen to come along to your next show in Hawkes Bay.
+      </div>
+      <img class="photo" src="" />
+    </div>
 
-  <div class="photo-wrap">
-    <a href="https://lh3.googleusercontent.com/grass-cs/ANxoTn1IPCbpTh5sWauRO_fVskvmzsxNQd-EMf_ZbNl8oUCdOBBqo8kZZZwjdHolfBzOcq45bWCaEN6vMDnjrzUKyVCPmnBEE04B2PiIcJHsIVlL36GB-nbDAb3XrMhUzfS6Df6DAc0=s3072-w3072-h1484-rw"
-       target="_blank">
-      <img class="photo"
-           src="https://lh3.googleusercontent.com/grass-cs/ANxoTn1IPCbpTh5sWauRO_fVskvmzsxNQd-EMf_ZbNl8oUCdOBBqo8kZZZwjdHolfBzOcq45bWCaEN6vMDnjrzUKyVCPmnBEE04B2PiIcJHsIVlL36GB-nbDAb3XrMhUzfS6Df6DAc0=s3072-w3072-h1484-rw">
-    </a>
-    <div class="photo-badge">📷 1 photo</div>
+    <div class="slide">
+      <div class="name">Karen Kanon</div>
+      <div class="stars">★★★★★</div>
+      <div class="meta">1 year ago</div>
+      <div class="text">
+What a wonderful experience for Whare Tiaki at Tuakau Primary today. We learnt heaps about science in a fun way. We learnt about forces- pushing, pulling and friction, with Emily while getting the troll (Alan) to move. Then we got to see giant bubbles in action. Years 1-4 all enjoyed and wanted more.
+Thanks for a well organised and professional set up and a humorous and very educational scientific day.
+      </div>
+      <img class="photo" src="https://lh3.googleusercontent.com/grass-cs/ANxoTn1IPCbpTh5sWauRO_fVskvmzsxNQd-EMf_ZbNl8oUCdOBBqo8kZZZwjdHolfBzOcq45bWCaEN6vMDnjrzUKyVCPmnBEE04B2PiIcJHsIVlL36GB-nbDAb3XrMhUzfS6Df6DAc0=s3072-w3072-h1484-rw" class="show"/>
+    </div>
+
+    <div class="slide">
+      <div class="name">Ravisha Dutt</div>
+      <div class="stars">★★★★★</div>
+      <div class="meta">9 months ago</div>
+      <div class="text">
+I was very impressed about the Science in the Van show because although the children had so much fun laughing and interacting back and forth, they never lost the science learning intentions and these were delivered throughout the show in a clear and engaging way.
+      </div>
+      <img class="photo" src="" />
+    </div>
+
+    <div class="slide">
+      <div class="name">Claire Cheeseman</div>
+      <div class="stars">★★★★★</div>
+      <div class="meta">11 months ago</div>
+      <div class="text">
+The best experience a group or class can have! So much fun and learning its priceless! We adore having Science in a can EVERY YEAR!
+      </div>
+      <img class="photo" src="" />
+    </div>
+
+    <div class="slide">
+      <div class="name">Lisa Marwick</div>
+      <div class="stars">★★★★★</div>
+      <div class="meta">9 months ago</div>
+      <div class="text">
+This duo were amazing! The students loved the informative and interactive show. It made science relatable to the real world. Will definitely book again next year.
+      </div>
+      <img class="photo" src="" />
+    </div>
+
+    <div class="slide">
+      <div class="name">Komal Singh</div>
+      <div class="stars">★★★★★</div>
+      <div class="meta">11 months ago</div>
+      <div class="text">
+The Billy Goat Gruff Show was a fantastic experience for our tamariki. It was highly engaging and held the children’s attention throughout, with plenty of laughter and excitement.
+      </div>
+      <img class="photo" src="" />
+    </div>
+
+    <div class="slide">
+      <div class="name">Fiona Francois</div>
+      <div class="stars">★★★★★</div>
+      <div class="meta">1 year ago</div>
+      <div class="text">
+Thank you Emily for bringing your wonderful show to our Kindergarten sharing your energy, passion, knowledge and enthusiasm.
+      </div>
+      <img class="photo" src="" />
+    </div>
+
+    <div class="slide">
+      <div class="name">Rebecca Hedges</div>
+      <div class="stars">★★★★★</div>
+      <div class="meta">10 months ago</div>
+      <div class="text">
+Theatre AND science in one? Priceless. Emily and Alan were hilarious, informative, interactive and kept our 75 5yr olds completely enthralled.
+      </div>
+      <img class="photo" src="" />
+    </div>
+
+    <div class="slide">
+      <div class="name">Tamie Fiveash</div>
+      <div class="stars">★★★★★</div>
+      <div class="meta">1 year ago</div>
+      <div class="text">
+I enjoyed the show. It was great that you involved both teachers and students. The quick pace ensures that the children stay engaged.
+      </div>
+      <img class="photo" src="" />
+    </div>
+
+    <div class="slide">
+      <div class="name">Arima Rhodes</div>
+      <div class="stars">★★★★★</div>
+      <div class="meta">1 year ago</div>
+      <div class="text">
+Had Science in a Van in our school today for the wonderful world of bubbles show, and it was awesome! The kids were so engaged.
+      </div>
+      <img class="photo" src="" />
+    </div>
+
+    <div class="slide">
+      <div class="name">Candy Wang</div>
+      <div class="stars">★★★★★</div>
+      <div class="meta">1 year ago</div>
+      <div class="text">
+We had so much fun learning about science with Emily. Highly recommend.
+      </div>
+      <img class="photo" src="" />
+    </div>
+
+    <div class="slide">
+      <div class="name">Genevieve Thomas</div>
+      <div class="stars">★★★★★</div>
+      <div class="meta">3 years ago</div>
+      <div class="text">
+Wonderful experience having Science in a Van visit our kura. A fun learning activity for everyone involved.
+      </div>
+      <img class="photo" src="" />
+    </div>
+
+    <div class="slide">
+      <div class="name">Lyndy Committie</div>
+      <div class="stars">★★★★★</div>
+      <div class="meta">9 months ago</div>
+      <div class="text">
+Very engaging with key words for us to go back and discuss and experiment with!
+      </div>
+      <img class="photo" src="" />
+    </div>
+
+    <div class="slide">
+      <div class="name">Kath Stayte</div>
+      <div class="stars">★★★★★</div>
+      <div class="meta">1 year ago</div>
+      <div class="text">
+Another amazing show with Emily and Alan. Students were super excited to see the huge bubbles, bubbles inside bubbles and the mixtures being made. Thanks once again for an amazing time!
+      </div>
+      <img class="photo" src="" />
+    </div>
+
+    <div class="slide">
+      <div class="name">Pat Lewis</div>
+      <div class="stars">★★★★★</div>
+      <div class="meta">1 year ago</div>
+      <div class="text">
+The presentation is excellent. The mix between entertainment and imparting knowledge is awesome.
+      </div>
+      <img class="photo" src="" />
+    </div>
+
+    <div class="slide">
+      <div class="name">Megan Rutter</div>
+      <div class="stars">★★★★★</div>
+      <div class="meta">5 years ago</div>
+      <div class="text">
+We booked Science in a Van to visit our kindy. The children loved the bubbles show.
+      </div>
+      <img class="photo" src="" />
+    </div>
+
+    <div class="slide">
+      <div class="name">Nina Busing Kindergarten</div>
+      <div class="stars">★★★★★</div>
+      <div class="meta">5 years ago</div>
+      <div class="text">
+Weeks later our children are still talking about your show!!
+      </div>
+      <img class="photo" src="" />
+    </div>
+
   </div>
-</div>
 
-<!-- 4 -->
-<div class="card">
-  <div class="name">Ravisha Dutt</div>
-  <div class="stars">★★★★★</div>
-  <div class="text">I was very impressed about the Science in the Van show because although the children had so much fun laughing and interacting back and forth, they never lost the science learning intentions and these were delivered throughout the show.</div>
-</div>
-
-<!-- 5 -->
-<div class="card">
-  <div class="name">Claire Cheeseman</div>
-  <div class="stars">★★★★★</div>
-  <div class="text">The best experience a group or class can have! So much fun and learning - we adore having Science in a Van EVERY YEAR!</div>
-</div>
-
-<!-- 6 -->
-<div class="card">
-  <div class="name">Lisa Marwick</div>
-  <div class="stars">★★★★★</div>
-  <div class="text">This duo were amazing! The students loved the informative and interactive show. It made science relatable to the real world. Will definitely book again next year.</div>
-</div>
-
-<!-- 7 -->
-<div class="card">
-  <div class="name">Komal Singh</div>
-  <div class="stars">★★★★★</div>
-  <div class="text">Science in the Van The Billy Goat Gruff Show was a fantastic experience for our tamariki. It was highly engaging and held the children’s attention throughout, with plenty of laughter and excitement.</div>
-</div>
-
-<!-- 8 -->
-<div class="card">
-  <div class="name">Fiona Francois</div>
-  <div class="stars">★★★★★</div>
-  <div class="text">Thank you Emily for bringing your wonderful show to our Kindergarten sharing your energy, passion, knowledge and enthusiasm. The children had a fabulous time learning about mixtures, bubbles and science.</div>
-</div>
-
-<!-- 9 -->
-<div class="card">
-  <div class="name">Rebecca Hedges</div>
-  <div class="stars">★★★★★</div>
-  <div class="text">Theatre AND science in one? Priceless. Emily and Alan were hilarious, informative and interactive and kept our 75 5yr olds completely enthralled.</div>
-</div>
-
-<!-- 10 -->
-<div class="card">
-  <div class="name">Tamie Fiveash</div>
-  <div class="stars">★★★★★</div>
-  <div class="text">I enjoyed the show. It was great that you involved both teachers and students. The quick pace ensured engagement and discussion around scientific terms.</div>
-</div>
-
-<!-- 11 -->
-<div class="card">
-  <div class="name">Arima Rhodes</div>
-  <div class="stars">★★★★★</div>
-  <div class="text">Had Science in a Van in our school today for the wonderful world of bubbles show, and it was awesome! The kids were engaged and learnt heaps.</div>
-</div>
-
-<!-- 12 -->
-<div class="card">
-  <div class="name">Candy Wang</div>
-  <div class="stars">★★★★★</div>
-  <div class="text">We had so much fun learning about science with Emily. She has a great sense of humour and a lovely presence with the children.</div>
-</div>
-
-<!-- DOTS -->
-<div class="dots" id="dots"></div>
-
-<!-- BUTTON -->
-<div class="view-all">
-  <a href="https://www.google.com/search?q=Science+in+a+Van+Reviews" target="_blank">
-    Read All Google Reviews →
+  <a class="button" href="https://www.google.com/search?sca_esv=59e8ea9c916b862d&rlz=1C1ONGR_enNZ1015NZ1015&sxsrf=ANbL-n4BIXoBsDEorV_SViJgZus_Pu9chQ:1779915476186&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOdrtChM_U_9eiWHoQPaIas9-3hVQxSimWCPAVWAb89Tb6walIxtjOsz0iujGOv1L7t0EQYcwVMn4TST_4DFc-_0TxPLSZWwb9ekg3ekFomiAw3770w%3D%3D&q=Science+in+a+Van+Reviews" target="_blank">
+    Read all reviews
   </a>
-</div>
 
 </div>
 
 <script>
-let current = 0;
-const cards = document.querySelectorAll('.card');
-const dotsContainer = document.getElementById('dots');
-let dots = [];
+let index = 0;
+const slides = document.querySelectorAll(".slide");
 
-function showSlide(i) {
-  cards.forEach(c => c.classList.remove('active'));
-  dots.forEach(d => d.classList.remove('active'));
-
-  cards[i].classList.add('active');
-  dots[i].classList.add('active');
+function show(i){
+  slides.forEach(s => s.classList.remove("active"));
+  slides[i].classList.add("active");
 }
 
-function nextSlide() {
-  current = (current + 1) % cards.length;
-  showSlide(current);
+function change(dir){
+  index = (index + dir + slides.length) % slides.length;
+  show(index);
 }
 
-function prevSlide() {
-  current = (current - 1 + cards.length) % cards.length;
-  showSlide(current);
-}
-
-/* dots */
-cards.forEach((_, i) => {
-  const dot = document.createElement('span');
-  dot.classList.add('dot');
-  if (i === 0) dot.classList.add('active');
-
-  dot.onclick = () => {
-    current = i;
-    showSlide(i);
-  };
-
-  dotsContainer.appendChild(dot);
-  dots.push(dot);
-});
-
-/* autoplay */
-setInterval(nextSlide, 5000);
+setInterval(() => {
+  change(1);
+}, 6000);
 </script>
 
 </body>
