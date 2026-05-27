@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: transparent;
+}
+
+.container {
+  max-width: 700px;
+  margin: auto;
+}
+
+.card {
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+  padding: 24px;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  display: none;
+  min-height: 180px;
+}
+
+.card.active {
+  display: block;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #202124;
+}
+
+.stars {
+  color: #fbbc04;
+  font-size: 18px;
+  margin: 6px 0;
+}
+
+.text {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #3c4043;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="card active">
+    <div class="name">Pat Lewis</div>
+    <div class="stars">★★★★★</div>
+    <div class="text">
+      The presentation is excellent. The mix between entertainment and imparting knowledge is awesome. The students were engaged throughout.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="name">Tim Christie</div>
+    <div class="stars">★★★★★</div>
+    <div class="text">
+      A great show. Hit the mark on filling in the scientific gaps of our classroom unit. Entertaining and lively.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="name">Deputy Principal</div>
+    <div class="stars">★★★★★</div>
+    <div class="text">
+      Thank you Science in a Van for the amazing science show. Our tamariki had an engaging and exciting learning experience.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="name">Sarah Akroyd</div>
+    <div class="stars">★★★★★</div>
+    <div class="text">
+      This is such a fun and engaging show... and a great way to get students and teachers buzzing about science!
+    </div>
+  </div>
+
+</div>
+
+<script>
+let index = 0;
+const cards = document.querySelectorAll('.card');
+
+function showCard(i) {
+  cards.forEach(c => c.classList.remove('active'));
+  cards[i].classList.add('active');
+}
+
+setInterval(() => {
+  index = (index + 1) % cards.length;
+  showCard(index);
+}, 5000);
+</script>
+
+</body>
+</html>
