@@ -97,6 +97,35 @@ body {
   border-radius: 8px;
   text-decoration: none;
 }
+  .review-flex {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.review-text {
+  flex: 1;
+}
+
+.review-image img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #eee;
+}
+
+/* mobile stacking */
+@media (max-width: 600px) {
+  .review-flex {
+    flex-direction: column;
+  }
+
+  .review-image img {
+    width: 100%;
+    height: auto;
+  }
+}
 </style>
 </head>
 
@@ -330,13 +359,26 @@ function render() {
   const r = reviews[index];
 
   container.innerHTML = `
-    <div class="review-slide active">
-      <div class="name">${r.name}</div>
-      <div class="stars">${r.stars}</div>
-      <div class="text">${r.text}</div>
-      ${r.img ? `<img class="review-img" src="${r.img}">` : ``}
+  <div class="review-slide active">
+
+    <div class="review-flex">
+
+      <div class="review-text">
+        <div class="name">${r.name}</div>
+        <div class="stars">${r.stars}</div>
+        <div class="text">${r.text}</div>
+      </div>
+
+      ${r.img ? `
+        <div class="review-image">
+          <img src="${r.img}" />
+        </div>
+      ` : ``}
+
     </div>
-  `;
+
+  </div>
+`;
 }
 
 function nextReview() {
