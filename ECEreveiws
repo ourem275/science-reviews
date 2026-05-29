@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Science in a Van Reviews</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+}
+
+.carousel-container {
+  max-width: 750px;
+  margin: auto;
+}
+
+.review-box {
+  position: relative;
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+  padding: 24px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+
+  height: 320px; /* ✅ fixed height */
+  overflow: hidden;
+}
+  
+.review-slide {
+  display: none;
+  animation: fade 0.5s ease-in-out;
+}
+
+.review-slide.active {
+  display: block;
+}
+
+@keyframes fade {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #202124;
+}
+
+.stars {
+  color: #fbbc04;
+  font-size: 18px;
+  margin: 6px 0;
+}
+
+  .dots {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.dot {
+  height: 8px;
+  width: 8px;
+  margin: 0 4px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #cfd8dc;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dot.active {
+  background: #1a73e8;
+  transform: scale(1.2);
+}
+  
+.text {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #3c4043;
+  white-space: normal;
+}
+
+.review-img {
+  margin-top: 12px;
+  max-width: 100%;
+  border-radius: 10px;
+  display: block;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.05);
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 50%;
+}
+
+.arrow:hover {
+  background: rgba(0,0,0,0.12);
+}
+
+.left { left: 10px; }
+.right { right: 10px; }
+
+.bottom-button {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.bottom-button a {
+  display: inline-block;
+  padding: 10px 16px;
+  background: #1a73e8;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+}
+  .review-flex {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.review-text {
+  flex: 1;
+  overflow-y: auto;   /* ✅ allows scrolling */
+  max-height: 100%;
+  padding-right: 6px;
+}
+
+  .review-text::-webkit-scrollbar {
+  width: 6px;
+}
+
+.review-text::-webkit-scrollbar-thumb {
+  background: #d0d0d0;
+  border-radius: 10px;
+}
+
+.review-image img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #eee;
+}
+
+/* mobile stacking */
+@media (max-width: 600px) {
+  .review-flex {
+    flex-direction: column;
+  }
+
+  .review-image img {
+    width: 100%;
+    height: auto;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="carousel-container">
+
+  <div class="review-box">
+
+    <button class="arrow left" onclick="prevReview()">‹</button>
+    <button class="arrow right" onclick="nextReview()">›</button>
+
+    <div id="reviews"></div>
+    <div id="dots" class="dots"></div>
+
+  </div>
+  
+<div class="bottom-button">
+  <a href="https://www.google.com/search?q=Science+in+a+Van+Reviews" target="_blank">
+    Read all reviews
+  </a>
+</div>
+
+</div>
+
+<script>
+const reviews = [
+  
+  {
+    name: "Gumboots Teachers",
+    stars: "★★★★★",
+    text: "What a fantastic show! Emily was great, very entertaining and so much science learning while having fun with bubbles. Well worth the price. Gumboots - Maraekakaho Early Childhood Centre and Tots n Dots from Kereru really enjoyed your fun show. Thank you Science in a Van :-)",
+    img: ""
+  },
+    
+  {
+    name: "Ravisha Dutt",
+    stars: "★★★★★",
+    text: "I was very impressed about the Science in the Van show because although the children had so much fun laughing and interacting back and forth, they never lost the science learning intentions and these were delivered throughout the show in creative ways that kept the children learning while having fun. Small team, small budget but still very impactful.",
+    img: ""
+  },
+
+  {
+    name: "Fiona Francois",
+    stars: "★★★★★",
+    text: "Thank you Emily for bringing your wonderful show to our Kindergarten sharing your energy, passion, knowledge and enthusiasm. The children had a fabulous time learning about the properties of mixtures, bubbles and discovering the fun of science. Highly recommend Science in a Van. Always a wonderful experience for the children.",
+    img: ""
+  },
+
+  {
+    name: "Candy Wang",
+    stars: "★★★★★",
+    text: "We had so much fun learning about science with Emily. She has a great sense of humour and a lovely presence with the children. The science experiments that she did were fun, enjoyable and safe. Definitely recommend her programme to ECE and Schools. :)",
+    img: ""
+  },
+
+   {
+    name: "Lyndy Committie",
+    stars: "★★★★★",
+    text: "Very engaging with some key words for us to go back and discuss and experiment with! The kids loved it! Many Thanks",
+    img: ""
+  },
+  {
+    name: "Kath Stayte",
+    stars: "★★★★★",
+    text: "Another amazing show with Emily and Alan. Students were super excited to see the huge bubbles, bubbles inside bubbles and the mixtures that were being made. Emily and Alan get the students to join in with copying words about making mixtures, answering questions and getting the students to ask any questions they may have.  Thanks once again for an amazing time!",
+    img: ""
+  },
+ 
+  {
+    name: "Megan Rutter",
+    stars: "★★★★★",
+    text: "As a Kindergarten Head Teacher, we booked Science in a Van to visit our kindy. Due to Covid, 2020 has meant we haven't been out on trips etc. We wanted to give our children a treat, that was educational and followed their learning. Emily, did a show for our children about bubbles. This was funny and interactive, which our children really enjoyed. We highly recommend Science in a Van, especially the bubble show.",
+    img: ""
+  },
+ 
+{
+    name: "Nina Busing Kindergarten",
+    stars: "★★★★★",
+    text: "Thank you so much Emily, weeks later our children are still talking about your show!!  You do such an amazing job at engaging the children to learn about science while making it so much fun for them.  We look forward to having you back again in the future.",
+    img: ""
+  },
+  {
+    name: "Rachel Gower",
+    stars: "★★★",
+    text: "The use of actions to act mixtures and reactions was great - easy to remember and recall with the children after the show.",
+    img: ""
+  },
+
+{
+    name: "Jamie MacAllister",
+    stars: "★★★★★",
+    text: "We had Emily from Science in a Van visit our daycare centre recently and the tamariki LOVED it. She kept them engaged the entire time and our pre schoolers are still talking about 'making a mixture' and watching for a 'reaction'. Thank you so much Emily - we cannot wait to have you back again in the future.",
+    img: ""
+  },
+
+{
+    name: "Helen Taege",
+    stars: "★★★★★",
+    text: "Another amazing performance from Science in a Van. The children had fun and were learning along the way! See you again in 2 years!!!",
+    img: ""
+  },
+
+  {
+    name: "Early Childhood Centre",
+    stars: "★★★★★",
+    text: "Huge thanks to Emily for entertaining our tamariki, whanau & kaiako! We loved the bubbles, Chinese fan and scientific surprises. Pai rawa e hoa!",
+    img: ""
+  },
+
+{
+    name: "Tracey Weight",
+    stars: "★★★★",
+    text: "Very engaging and entertaining with plenty of awesome vocab and concepts explored. Thanks!",
+    img: ""
+  },
+
+];
+
+let index = 0;
+const container = document.getElementById("reviews");
+
+const dotsContainer = document.getElementById("dots");
+
+function renderDots() {
+  dotsContainer.innerHTML = reviews.map((_, i) => `
+    <span class="dot ${i === index ? "active" : ""}" onclick="goToReview(${i})"></span>
+  `).join("");
+}
+
+function goToReview(i) {
+  index = i;
+  render();
+}
+  
+function render() {
+  const r = reviews[index];
+
+  container.innerHTML = `
+    <div class="review-slide active">
+      <div class="review-flex">
+
+        <div class="review-text">
+          <div class="name">${r.name}</div>
+          <div class="stars">${r.stars}</div>
+          <div class="text">${r.text}</div>
+        </div>
+
+        ${r.img ? `
+          <div class="review-image">
+            <img src="${r.img}" />
+          </div>
+        ` : ``}
+
+      </div>
+    </div>
+  `;
+
+  // 🔥 NEW: adjust container height smoothly
+    requestAnimationFrame(() => {
+    const box = document.querySelector(".review-box");
+    const active = document.querySelector(".review-slide.active");
+
+    if (box && active) {
+      box.style.height = active.offsetHeight + 48 + "px";
+    }
+  });
+
+  renderDots(); // 👈 add it here (ONLY once)
+}
+  
+  setTimeout(() => {
+  const box = document.querySelector(".review-box");
+  const active = document.querySelector(".review-slide.active");
+
+  if (box && active) {
+    box.style.height = active.offsetHeight + 48 + "px";
+  }
+}, 50);
+function nextReview() {
+  index = (index + 1) % reviews.length;
+  render();
+}
+
+function prevReview() {
+  index = (index - 1 + reviews.length) % reviews.length;
+  render();
+}
+
+render();
+
+setInterval(() => {
+  nextReview();
+}, 5000);
+</script>
+
+</body>
+</html>
